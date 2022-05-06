@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {update} from  "./redux/userSlice";
 
 function Content(){
