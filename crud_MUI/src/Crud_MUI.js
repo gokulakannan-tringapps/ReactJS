@@ -57,9 +57,9 @@ function Crud_MUI(){
 	return(
 	 
 	<div className="Layout">
-		 <Grid container Spacing={1} sx={{bgcolor:"#262126",}} >
+		 <Grid container Spacing={1} sx={{bgcolor:"#ded5de",}} >
 		 	
-        		<Grid item xs={6} sx={{bgcolor:"#ded5de",p:2,}}>
+        		<Grid item xs={12} sx={{bgcolor:"#ded5de",p:2,}}>
         		 
         		<FormControl  sx={{ width:"100%", height:"100%", }}>
           			
@@ -113,12 +113,12 @@ function Crud_MUI(){
         		</Grid>
         		 
         		 
-        		<Grid item xs={6} sx={{bgcolor:"#ded5de",p:2,}}>
+        		<Grid container rowSpacing={1} columnSpacing={1} sx={{bgcolor:"#ded5de", }}>
           			
           			{
 				 card &&card.map(eachDetails =>{
 				    return(
-          				   <Card sx={{  maxWidth: 345 }}>	 
+          				   <Card sx={{  maxWidth: 300,ml:5, }}>	 
           					 <CardMedia
 							component="img"
 							height="140"
@@ -126,13 +126,14 @@ function Crud_MUI(){
 							alt="captainAmerica"
 						   />
 						   <CardContent>
-							<Typography gutterBottom variant="h5" component="div">
-							 Product Name : {eachDetails.name}
+							<Typography sx={{ color:"#040121",}}  
+							gutterBottom variant="h2" >
+							  {eachDetails.name}
 							</Typography>
-							<Typography gutterBottom variant="h5" component="div">
+							<Typography gutterBottom variant="h4" component="div">
 							 Product Type : {eachDetails.type}
 							</Typography>
-							<Typography gutterBottom variant="h5" component="div">
+							<Typography gutterBottom variant="p" component="div">
 							 Product Details : {eachDetails.details}
 							</Typography>
 						    </CardContent>
