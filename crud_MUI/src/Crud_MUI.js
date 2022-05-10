@@ -1,32 +1,9 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-//import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea,CardHeader } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { IconButton,CardActionArea,CardHeader,CardMedia,Typography,CardContent,CardActions,Card, Grid, TextField, FormControl,MenuItem,Select,InputLabel, Button} from '@mui/material';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function Crud_MUI(){
 	const [counter, setCounter] = React.useState(1);
@@ -54,7 +31,7 @@ function Crud_MUI(){
 		setCounter(counter + 1);
 		setCard([...card,newCard]);
 	 }
-	 else{
+	 else if(status=="edit"){
 	 	let editedCardUpdate=card.filter(item=>item.id!=id)
 	 	let editedCard={id,name,type,details}
 	 	setCard([...editedCardUpdate,editedCard]);
@@ -62,7 +39,7 @@ function Crud_MUI(){
 	 setName("");
 	 setType("");
 	 setDetails("");
-	 setStatus("edit");
+	 setStatus("add");
 		
 	}
 	const deleteCard=(id) =>{
@@ -75,15 +52,17 @@ function Crud_MUI(){
 		setType(editCard[0].type);
 		setDetails(editCard[0].details);
 		setId(editCard[0].id);
+		setStatus("edit");
 	}
 	return(
+	 
 	<div className="Layout">
-		 <Grid container Spacing={1} >
+		 <Grid container Spacing={1} sx={{bgcolor:"#262126",}} >
 		 	
-        		<Grid item xs={6}>
+        		<Grid item xs={6} sx={{bgcolor:"#ded5de",p:2,}}>
         		 
         		<FormControl  sx={{ width:"100%", height:"100%", }}>
-          			<Item>
+          			
           			<div>
           			<TextField sx={{ml:1, mt:2, width:"70%", }}
           			required  
@@ -96,7 +75,6 @@ function Crud_MUI(){
           			 <InputLabel 
           			 required id="VType">VehicleType</InputLabel>
           			 <Select
-          			 	
 					  id="Type"
 					  labelId="VType"
 					  label="VehicleType"
@@ -129,51 +107,58 @@ function Crud_MUI(){
         				SAVE
         				</Button>
         			</div>
-          			</Item>
+          			
         		</FormControl>
         			
         		</Grid>
         		 
-        		<Grid item xs={6}>
-          			<Item>
+        		 
+        		<Grid item xs={6} sx={{bgcolor:"#ded5de",p:2,}}>
+          			
           			{
 				 card &&card.map(eachDetails =>{
 				    return(
-          				   <Card sx={{ minWidth: 100 }}>	 
-          					<CardHeader 
-						  component={Typography}
-						  title={"Product Card"}
-						  subheader={ <img width="15%" src="Lion.jpeg"/>}
-						  action={
-							  <CardActions>
-							<Button size="small" onClick={()=>editCard(eachDetails.id)}>Edit</Button>
-							<Button size="small" onClick={()=>deleteCard(eachDetails.id)} >Delete</Button>
-						      </CardActions>
-							}
-							
-						/>
-						<CardContent>
-						   <Typography sx={{ color:"#8608fc",}} 
-						   variant="button" display="block" gutterBottom>
-						Product Name : {eachDetails.name} </Typography>
-						
-						 <Typography sx={{ color:"#08fc2c",}} 
-						 variant="button" display="block" gutterBottom>	
-						  Product Type : {eachDetails.type}  </Typography>
-						  
-						   <Typography sx={{ color:"#f27d07",}}
-						   variant="button" display="block" gutterBottom>
-						   Product Description : {eachDetails.details }
-						 </Typography>
-						</CardContent>
+          				   <Card sx={{  maxWidth: 345 }}>	 
+          					 <CardMedia
+							component="img"
+							height="140"
+							image="captainAmerica.jpg"
+							alt="captainAmerica"
+						   />
+						   <CardContent>
+							<Typography gutterBottom variant="h5" component="div">
+							 Product Name : {eachDetails.name}
+							</Typography>
+							<Typography gutterBottom variant="h5" component="div">
+							 Product Type : {eachDetails.type}
+							</Typography>
+							<Typography gutterBottom variant="h5" component="div">
+							 Product Details : {eachDetails.details}
+							</Typography>
+						    </CardContent>
+						    <CardActions>
+							 <IconButton aria-label="edit">
+							  	<EditIcon 
+							  		onClick={()=>editCard(eachDetails.id)}
+							  	/>
+						  	</IconButton>
+						  	 <IconButton aria-label="delete">
+							  	<DeleteIcon 
+							  		onClick={()=>deleteCard(eachDetails.id)}
+							  	/>
+							   </IconButton>
+						    </CardActions>
+						    
+						    
           				   </Card>	 			
 				    )
 				 })
 				}
-          			</Item>
+          			
         		</Grid>
       		</Grid>
 	</div>
+	
 	);
 }
 
